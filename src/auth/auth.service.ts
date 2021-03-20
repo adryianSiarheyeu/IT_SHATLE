@@ -1,10 +1,11 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
+import { SignOptions } from "jsonwebtoken";
+
+import { CreateUserTokenDto } from "src/token/dto/create-user-token.dto";
 import { UserService } from "src/user/user.service";
 import { TokenService } from "src/token/token.service";
 import { CreateUserDto } from "src/user/dto/create-user.dto";
-import { SignOptions } from "jsonwebtoken";
-import { CreateUserTokenDto } from "src/token/dto/create-user-token.dto";
 
 @Injectable()
 export class AuthService {
@@ -37,8 +38,6 @@ export class AuthService {
   }
 
   private async saveToken(createUserTokenDto: CreateUserTokenDto) {
-    const userToken = await this.tokenService.create(createUserTokenDto);
-
-    return userToken;
+    return await this.tokenService.create(createUserTokenDto);
   }
 }
