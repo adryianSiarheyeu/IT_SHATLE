@@ -5,7 +5,7 @@ import {
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { SignOptions } from "jsonwebtoken";
-import moment from "moment";
+const moment = require("moment");
 
 import { CreateUserTokenDto } from "src/token/dto/create-user-token.dto";
 import { UserService } from "src/user/user.service";
@@ -27,10 +27,14 @@ export class AuthService {
   ) {}
 
   async signUp(createUserDto: CreateUserDto): Promise<boolean> {
-    const user = await this.userService.create(createUserDto);
-    await this.sendConfirmation(user);
+    try {
+      const user = await this.userService.create(createUserDto);
+      await this.sendConfirmation(user);
 
-    return true;
+      return true;
+    } catch (error) {
+      return error;
+    }
   }
 
   signIn(email, password) {}
