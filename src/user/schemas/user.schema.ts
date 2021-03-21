@@ -1,57 +1,63 @@
-import * as Mongoose from 'mongoose';
+import * as Mongoose from "mongoose";
 
-import { genderEnum } from '../enums/gender.enum';
-import { rolesEnum } from '../enums/roles.enum';
+import { genderEnum } from "../enums/gender.enum";
+import { rolesEnum } from "../enums/roles.enum";
+import { statusEnum } from "../enums/status.enum";
 
 export const UserSchema = new Mongoose.Schema({
+  status: {
+    type: String,
+    enum: Object.values(statusEnum),
+    default: statusEnum.pending
+  },
   email: {
     type: String,
-    required: true,
+    required: true
   },
   firstName: {
     type: String,
-    required: true,
+    required: true
   },
   lastName: {
     type: String,
-    required: true,
+    required: true
   },
   gender: {
     type: String,
     required: true,
-    enum: Object.values(genderEnum),
+    enum: Object.values(genderEnum)
   },
   password: {
     type: String,
-    required: true,
+    required: true
   },
   address: {
     city: {
       type: String,
-      default: null,
+      default: null
     },
     country: {
       type: String,
-      default: null,
+      default: null
     },
     addressLine1: {
       type: String,
-      default: null,
+      default: null
     },
     addressLine2: {
       type: String,
-      default: null,
-    },
+      default: null
+    }
   },
   phone: {
     type: String,
-    default: null,
+    default: null
   },
   roles: {
     type: [String],
     default: rolesEnum.customer,
-    enum: Object.values(rolesEnum),
-  },
+    enum: Object.values(rolesEnum)
+  }
 });
 
 UserSchema.index({ email: 1 }, { unique: true });

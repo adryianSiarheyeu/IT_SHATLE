@@ -8,9 +8,11 @@ import { JwtStrategy } from "./jwt.strategy";
 import { UserModule } from "src/user/user.module";
 import { TokenModule } from "src/token/token.module";
 import { UserService } from "../user/user.service";
+import { MailModule } from "../mail/mail.module";
 
 @Module({
   imports: [
+    MailModule,
     UserModule,
     TokenModule,
     PassportModule.register({ defaultStrategy: "jwt" }),
