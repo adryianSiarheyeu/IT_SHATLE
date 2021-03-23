@@ -5,11 +5,11 @@ import { rolesEnum } from "../enums/roles.enum";
 import { statusEnum } from "../enums/status.enum";
 
 export const UserSchema = new Mongoose.Schema({
-  status: {
-    type: String,
-    enum: Object.values(statusEnum),
-    default: statusEnum.pending
-  },
+  // status: {
+  //   type: String,
+  //   enum: Object.values(statusEnum),
+  //   default: statusEnum.pending
+  // },
   email: {
     type: String,
     required: true
